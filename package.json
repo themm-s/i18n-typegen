@@ -1,0 +1,30 @@
+{
+  "name": "i18n-typegen",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Generator TS-types from i18n JSON locales",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "i18n-typegen": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "i18n",
+    "typescript",
+    "localization",
+    "types"
+  ],
+  "author": "Themms",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.6.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "undici-types": "^7.13.0"
+  }
+}
