@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, watch } from 'fs';
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -103,8 +103,29 @@ function generateTypeForObject(obj: Record<string, any>, indent: number): string
   return result;
 }
 
+function watchLocales(localesPath: string, outputPath: string) {
+  console.log(`👀 Watching for changes in: ${localesPath}`);
+  generateTypes(localesPath, outputPath);
+
+  watch(localesPath, { recursive: true }, (eventType, filename) => {
+    if (filename?.endsWith('.json')) {
+      console.log(`\n📄 File changed: ${filename}`);
+      try {
+        generateTypes(localesPath, outputPath);
+      } catch (err) {
+        console.error('❌ Error regenerating types:', err);
+      }
+    }
+  });
+}
+
 const args = process.argv.slice(2);
 const localesPath = args[0] || join(__dirname, '../src/locale/ru');
 const outputPath = args[1] || join(__dirname, '../src/lib/i18n/i18n.d.ts');
+const watchMode = args.includes('--watch') || args.includes('--w');
 
-generateTypes(localesPath, outputPath);
+if (watchMode) {
+  watchLocales(localesPath, outputPath);
+} else {
+  generateTypes(localesPath, outputPath);
+}
