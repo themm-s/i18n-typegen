@@ -1,6 +1,6 @@
 {
   "name": "i18n-typegen",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
   "description": "Generator TS-types from i18n JSON locales",
   "main": "dist/index.js",
