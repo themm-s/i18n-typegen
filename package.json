@@ -22,6 +22,17 @@
     "localization",
     "types"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themm-s/i18n-typegen"
+  },
+  "homepage": "https://github.com/themm-s/i18n-typegen#readme",
+  "files": [
+    "dist/",
+    "CHANGELOG.md",
+    "README.md",
+    "package.json"
+  ],
   "author": "Themms",
   "license": "MIT",
   "devDependencies": {
